@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 /**
  * Created by stefan on 04.07.14.
  */
-public class HAEventsKernelExtensionFactory extends KernelExtensionFactory<HAEventsKernelExtensionFactory.Dependencies> {
+public class HaEventsKernelExtensionFactory extends KernelExtensionFactory<HaEventsKernelExtensionFactory.Dependencies> {
 
     public interface Dependencies {
         GraphDatabaseService getGraphDatabaseService();
@@ -20,7 +20,7 @@ public class HAEventsKernelExtensionFactory extends KernelExtensionFactory<HAEve
         HighAvailability getHighAvailability(); // don't use this right now, we need to use the workaround
     }
 
-    public HAEventsKernelExtensionFactory() {
+    public HaEventsKernelExtensionFactory() {
         super("haevents");
     }
 
