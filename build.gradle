@@ -23,10 +23,12 @@ group="org.neo4j.extension.ha.events"
 dependencies {
     testCompile group: "org.codehaus.groovy", name: "groovy-all", version: "2.3.3"
     compile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion
+    compile group: 'org.neo4j', name: 'neo4j-ha', version: neo4jVersion
     compile group: 'org.neo4j', name: 'neo4j-lucene-index', version: neo4jVersion
     compile group: 'org.neo4j', name: 'server-api', version: neo4jVersion
     testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
     testCompile "org.neo4j.contrib:neo4j-spock-extension:0.3"
+    testCompile "org.codehaus.gpars:gpars:1.2.1"
     testCompile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion, classifier: 'tests'
     testCompile group: 'org.neo4j.app', name: 'neo4j-server', version: neo4jVersion, classifier: 'tests'
     testCompile group: 'org.neo4j.app', name: 'neo4j-server', version: neo4jVersion
