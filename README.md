@@ -19,12 +19,12 @@ Clone the github code and run `./gradlew assemble`. Copy the resulting jar file 
 Description
 -----------
 
-A Neo4j kernel extension is a class subclassing (KernelExtensionFactory)[https://github.com/neo4j/neo4j/blob/master/community/kernel/src/main/java/org/neo4j/kernel/extension/KernelExtensionFactory.java] and being registered via JVM's service loader capability. The dependencies are injected by the superclass.
+A Neo4j kernel extension is a class subclassing [KernelExtensionFactory](https://github.com/neo4j/neo4j/blob/master/community/kernel/src/main/java/org/neo4j/kernel/extension/KernelExtensionFactory.java) and being registered via JVM's service loader capability. The dependencies are injected by the superclass.
 
-Neo4j's internal dependency mechanism already gives access to an interface called (ClusterMemberEvents)[https://github.com/neo4j/neo4j/blob/master/enterprise/cluster/src/main/java/org/neo4j/cluster/member/ClusterMemberEvents.java] enabling to register customer listeners. 
-Additionally Neo4j HA contains a interface called (HighAvailability)[https://github.com/neo4j/neo4j/blob/master/enterprise/ha/src/main/java/org/neo4j/kernel/ha/cluster/HighAvailability.java] allowing to register another listener. Unfortunately the latter is not exposed via the dependency mechanism. As a workaround we access a private field on HighAvailableGraphDatabase to get access.
+Neo4j's internal dependency mechanism already gives access to an interface called [ClusterMemberEvents](https://github.com/neo4j/neo4j/blob/master/enterprise/cluster/src/main/java/org/neo4j/cluster/member/ClusterMemberEvents.java) enabling to register customer listeners. 
+Additionally Neo4j HA contains a interface called [HighAvailability](https://github.com/neo4j/neo4j/blob/master/enterprise/ha/src/main/java/org/neo4j/kernel/ha/cluster/HighAvailability.java) allowing to register another listener. Unfortunately the latter is not exposed via the dependency mechanism. As a workaround we access a private field on HighAvailableGraphDatabase to get access.
 
-(HaEventsKernelExtension)[https://github.com/sarmbruster/neo4j-ha-events/blob/master/src/main/java/org/neo4j/extension/ha/events/HaEventsKernelExtension.java] is reponsible for registering a kind of dummy event listener (HighAvailabilityAndClusterMemberListener)[https://github.com/sarmbruster/neo4j-ha-events/blob/master/src/main/java/org/neo4j/extension/ha/events/HighAvailabilityAndClusterMemberListener.java] implementing both kind of event listeners. As of now it just traces the received events to stdout.
+[HaEventsKernelExtension](https://github.com/sarmbruster/neo4j-ha-events/blob/master/src/main/java/org/neo4j/extension/ha/events/HaEventsKernelExtension.java) is reponsible for registering a kind of dummy event listener [HighAvailabilityAndClusterMemberListener](https://github.com/sarmbruster/neo4j-ha-events/blob/master/src/main/java/org/neo4j/extension/ha/events/HighAvailabilityAndClusterMemberListener.java) implementing both kind of event listeners. As of now it just traces the received events to stdout.
 
 WARNING: do not add complex and time consuming code into the listeners as they might influence the cluster.
 
